@@ -1,14 +1,14 @@
 /*
  * @Author: luoxi
- * @LastEditTime: 2022-03-10 22:04:59
+ * @LastEditTime: 2022-03-12 22:14:56
  * @LastEditors: your name
  * @Description:
  */
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Home from "../views/Home.vue";
-import Classify from "../views/Classify.vue";
-import Shopping from "../views/Shopping.vue";
+import Home from "../views/Home/index.vue";
+import Classify from "../views/Classify/index.vue";
+import Shopping from "../views/Shopping/index.vue";
 
 Vue.use(VueRouter);
 
@@ -30,11 +30,8 @@ const routes = [
   },
   {
     path: '*',
-    redirect: '/home'
+    redirect: '/home/classify'
   },
-  {
-    path: '/',
-  }
 ];
 
 const router = new VueRouter({
