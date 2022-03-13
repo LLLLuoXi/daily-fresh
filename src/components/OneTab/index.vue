@@ -1,6 +1,6 @@
 <!--
  * @Author: luoxi
- * @LastEditTime: 2022-03-12 23:19:11
+ * @LastEditTime: 2022-03-13 21:39:31
  * @LastEditors: your name
  * @Description: 
 -->
@@ -24,6 +24,8 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
+import tool from "../../utils/tool";
 export default {
   data() {
     return {
@@ -104,6 +106,7 @@ export default {
     };
   },
   methods: {
+    ...mapActions(["getSideList"]),
     scrollTo(i, e) {
       if (this.isMoving) {
         return;
@@ -114,27 +117,18 @@ export default {
       const itemLeft = e.target.getBoundingClientRect().left;
       const containerWidth = oneTab.offsetWidth;
       //   oneTab.scrollLeft += itemWidth / 2 + itemLeft - containerWidth / 2;
-      this.moveTo(
+      tool.moveTo(
         oneTab.scrollLeft,
-        itemWidth / 2 + itemLeft - containerWidth / 2
+        itemWidth / 2 + itemLeft - containerWidth / 2,
+        oneTab,
+        "scrollLeft"
       );
       console.log("i", i);
+      this.getSideList(this.menuList[i].title);
     },
-    moveTo(start, end) {
-      let dis = 0;
-      let speed = 5;
-      if (end < 0) {
-        speed *= -1;
-      }
-      const t = setInterval(() => {
-        dis += speed;
-        this.$refs.oneTab.scrollLeft = start + dis;
-        if (Math.abs(dis) > Math.abs(end)) {
-          this.$refs.oneTab.scrollLeft = start + end;
-          clearInterval(t);
-        }
-      }, 2);
-    },
+  },
+  mounted() {
+    this.getSideList(this.menuList[0].title);
   },
 };
 </script>

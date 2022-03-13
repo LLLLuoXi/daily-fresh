@@ -1,6 +1,6 @@
 <!--
  * @Author: luoxi
- * @LastEditTime: 2022-03-12 22:16:58
+ * @LastEditTime: 2022-03-13 01:49:10
  * @LastEditors: your name
  * @Description: 
 -->
@@ -11,13 +11,15 @@
       <span>苹果特价9.9</span>
     </div>
     <OneTab />
+    <SideBar />
   </div>
 </template>
 
 <script>
 import OneTab from "@/components/OneTab";
+import SideBar from "@/components/SideBar";
 export default {
-  components: { OneTab },
+  components: { OneTab, SideBar },
 };
 </script>
 
