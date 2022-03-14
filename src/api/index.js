@@ -1,6 +1,6 @@
 /*
  * @Author: luoxi
- * @LastEditTime: 2022-03-13 01:46:38
+ * @LastEditTime: 2022-03-13 22:16:02
  * @LastEditors: your name
  * @Description: 
  */
@@ -24,8 +24,13 @@ const getSideList = (type) => instance.get(
     { params: { type } },
 );
 
-console.log('getSideList', getSideList);
+const getGoodsList = (type, page, size, sort) => instance.get(
+    URLs.getGoodsList,
+    { params: { type, page, size, sort } }
+
+)
 
 export default {
-    getSideList
+    getSideList,
+    getGoodsList
 }

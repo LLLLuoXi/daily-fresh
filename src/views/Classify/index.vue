@@ -1,6 +1,6 @@
 <!--
  * @Author: luoxi
- * @LastEditTime: 2022-03-13 01:49:10
+ * @LastEditTime: 2022-03-13 22:43:16
  * @LastEditors: your name
  * @Description: 
 -->
@@ -12,14 +12,23 @@
     </div>
     <OneTab />
     <SideBar />
+    <template v-if="showContent">
+      <SideBar />
+      <GoodsList />
+    </template>
+    <van-loading size="2rem" vertical v-else />
   </div>
 </template>
 
 <script>
+import { mapState } from "vuex";
 import OneTab from "@/components/OneTab";
 import SideBar from "@/components/SideBar";
+import GoodsList from "@/components/GoodsList";
+
 export default {
-  components: { OneTab, SideBar },
+  components: { OneTab, SideBar, GoodsList },
+  computed: { ...mapState({ showContent: (state) => state.showContent }) },
 };
 </script>
 

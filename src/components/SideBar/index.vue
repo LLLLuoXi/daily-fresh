@@ -1,6 +1,6 @@
 <!--
  * @Author: luoxi
- * @LastEditTime: 2022-03-13 21:41:30
+ * @LastEditTime: 2022-03-14 23:19:28
  * @LastEditors: your name
  * @Description: 
 -->
@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapActions, mapMutations, mapState } from "vuex";
 import tool from "../../utils/tool";
 export default {
   data() {
@@ -36,6 +36,8 @@ export default {
     }),
   },
   methods: {
+    ...mapMutations(["resetGoodsList"]),
+    ...mapActions(["getGoodsList"]),
     scrollTo(i, e) {
       if (this.isMoving) {
         return;
@@ -53,7 +55,15 @@ export default {
         side,
         "scrollTop"
       );
+      // 获取商品列表
+      this.resetGoodsList();
+      this.getGoodsList({ type: this.sideList[i], page: 1, sortType: "all" });
     },
+  },
+  mounted() {
+    // 获取商品列表
+    this.resetGoodsList();
+    this.getGoodsList({ type: this.sideList[0], page: 1, sortType: "all" });
   },
 };
 </script>

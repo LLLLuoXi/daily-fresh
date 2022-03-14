@@ -1,6 +1,6 @@
 /*
  * @Author: luoxi
- * @LastEditTime: 2022-03-13 01:46:50
+ * @LastEditTime: 2022-03-14 23:16:48
  * @LastEditors: your name
  * @Description: 
  */
@@ -12,18 +12,49 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    sideList: []
+    sideList: [],
+    showContent: false,
+    size: 5,
+    goodsList: [],
+    type: null
   },
   mutations: {
     setSideList(state, list) {
       state.sideList = list;
+    },
+    setShowContent(state, bool) {
+      state.showContent = bool;
+    },
+    setGoodsList(state, list) {
+      state.goodsList = [...state.goodsList, ...list]
+    },
+    resetGoodsList(state) {
+      state.goodsList = []
+    },
+    setGoodsType(state, type) {
+      state.type = type
     }
   },
   actions: {
     async getSideList({ commit }, type) {
+      commit('setShowContent', false);
       const value = await api.getSideList(type)
       commit('setSideList', value)
-      console.log(value);
+      commit('setShowContent', true);
+      // console.log(value);
+    },
+
+    async getGoodsList({ state, commit }, options) {
+      const { page, sortType } = options
+      const type = options.type || state.type
+      const { list, total } = await api.getGoodsList(type, page, state.size, sortType)
+      commit('setGoodsList', list)
+      commit('setGoodsType', type)
+      if (total > state.goodsList.length) {
+        // 继续加载
+        return true
+      }
+      return false
     }
   },
   modules: {},
