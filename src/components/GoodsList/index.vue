@@ -1,6 +1,6 @@
 <!--
  * @Author: luoxi
- * @LastEditTime: 2022-03-14 23:22:54
+ * @LastEditTime: 2022-03-15 22:45:06
  * @LastEditors: your name
  * @Description: 
 -->
@@ -33,7 +33,12 @@
           @load="onLoad"
           :immediate-check="false"
         >
-          <GoodsCard v-for="item in goodsList" :key="item.id" v-bind="item" />
+          <GoodsCard
+            v-for="item in goodsList"
+            :key="item.id"
+            v-bind="item"
+            :num="counterMap[item.id]"
+          />
         </van-list>
       </van-pull-refresh>
     </div>
@@ -55,7 +60,10 @@ export default {
   },
   components: { GoodsCard },
   computed: {
-    ...mapState({ goodsList: (state) => state.goodsList }),
+    ...mapState({
+      goodsList: (state) => state.goodsList,
+      counterMap: (state) => state.counterMap,
+    }),
   },
   methods: {
     ...mapMutations(["resetGoodsList"]),
@@ -72,6 +80,7 @@ export default {
           this.type = "price-up";
         }
       }
+      this.onRefresh();
     },
     onRefresh() {
       this.isLoading = true;
