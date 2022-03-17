@@ -1,3 +1,9 @@
+<!--
+ * @Author: luoxi
+ * @LastEditTime: 2022-03-17 22:49:09
+ * @LastEditors: your name
+ * @Description: 
+-->
 # daily-fresh
 
 ## Project setup
@@ -20,5 +26,4 @@ npm run build
 npm run lint
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+
