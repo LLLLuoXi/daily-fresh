@@ -1,6 +1,6 @@
 /*
  * @Author: luoxi
- * @LastEditTime: 2022-03-12 22:14:56
+ * @LastEditTime: 2022-03-16 21:52:12
  * @LastEditors: your name
  * @Description:
  */
@@ -9,6 +9,7 @@ import VueRouter from "vue-router";
 import Home from "../views/Home/index.vue";
 import Classify from "../views/Classify/index.vue";
 import Shopping from "../views/Shopping/index.vue";
+import Search from "../views/Search/index.vue";
 
 Vue.use(VueRouter);
 
@@ -27,6 +28,10 @@ const routes = [
         component: Shopping
       }
     ]
+  },
+  {
+    path: '/search',
+    component: Search
   },
   {
     path: '*',

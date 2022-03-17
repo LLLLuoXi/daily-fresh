@@ -1,15 +1,15 @@
 <!--
  * @Author: luoxi
- * @LastEditTime: 2022-03-13 22:43:16
+ * @LastEditTime: 2022-03-16 21:54:21
  * @LastEditors: your name
  * @Description: 
 -->
 <template>
   <div class="classify-container">
-    <div class="search-btn">
+    <router-link class="search-btn" tag="div" to="/search">
       <van-icon name="search" />
       <span>苹果特价9.9</span>
-    </div>
+    </router-link>
     <OneTab />
     <SideBar />
     <template v-if="showContent">

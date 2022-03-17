@@ -1,6 +1,6 @@
 /*
  * @Author: luoxi
- * @LastEditTime: 2022-03-13 21:36:58
+ * @LastEditTime: 2022-03-16 23:17:39
  * @LastEditors: your name
  * @Description: 
  */
@@ -22,4 +22,14 @@ function moveTo(start, end, dom, prop) {
   }, 2);
 }
 
-export default { moveTo }
+function debounce(fn, duration = 100) {
+  let timer = null
+  return (...args) => {
+    clearTimeout(timer)
+    timer = setTimeout(() => {
+      fn(...args)
+    }, duration)
+  }
+}
+
+export default { moveTo, debounce }
