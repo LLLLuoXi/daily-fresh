@@ -1,6 +1,6 @@
 <!--
  * @Author: luoxi
- * @LastEditTime: 2022-03-15 22:12:34
+ * @LastEditTime: 2022-03-18 22:30:31
  * @LastEditors: your name
  * @Description: 
 -->
@@ -61,8 +61,8 @@ export default {
   },
   mounted() {
     // 获取商品列表
-    this.resetGoodsList();
-    this.getGoodsList({ type: this.sideList[0], page: 1, sortType: "all" });
+    // this.resetGoodsList();
+    // this.getGoodsList({ type: this.sideList[0], page: 1, sortType: "all" });
   },
 };
 </script>

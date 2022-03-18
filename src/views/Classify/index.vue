@@ -1,6 +1,6 @@
 <!--
  * @Author: luoxi
- * @LastEditTime: 2022-03-16 21:54:21
+ * @LastEditTime: 2022-03-18 22:35:40
  * @LastEditors: your name
  * @Description: 
 -->
@@ -21,14 +21,32 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapState, mapMutations, mapActions } from "vuex";
 import OneTab from "@/components/OneTab";
 import SideBar from "@/components/SideBar";
 import GoodsList from "@/components/GoodsList";
 
 export default {
   components: { OneTab, SideBar, GoodsList },
-  computed: { ...mapState({ showContent: (state) => state.showContent }) },
+  computed: {
+    ...mapState({
+      showContent: (state) => state.showContent,
+      setSideList: (state) => state.setSideList,
+      sideList: (state) => state.sideList,
+    }),
+  },
+  methods: {
+    ...mapMutations(["resetGoodsList"]),
+    ...mapActions(["getGoodsList"]),
+  },
+  watch: {
+    showContent() {
+      if (this.showContent == true) {
+        this.resetGoodsList();
+        this.getGoodsList({ type: this.sideList[0], page: 1, sortType: "all" });
+      }
+    },
+  },
 };
 </script>
 

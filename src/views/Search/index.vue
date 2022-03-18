@@ -1,13 +1,13 @@
 <!--
  * @Author: luoxi
- * @LastEditTime: 2022-03-17 22:08:07
+ * @LastEditTime: 2022-03-18 22:11:43
  * @LastEditors: your name
  * @Description: 
 -->
 <template>
   <div class="search-wrapper">
     <div class="search-head">
-      <van-icon name="arrow-left" class="arr-left" />
+      <van-icon name="arrow-left" class="arr-left" @click="$router.goBack()" />
       <van-search
         class="search-content"
         v-model="value"
@@ -51,6 +51,9 @@
         />
       </van-list>
     </div>
+    <div class="history" v-if="(likeList.length <= 0) & !showList">
+      <MyHistory :searchList="searchList" @search="onSearch" />
+    </div>
   </div>
 </template>
 
@@ -58,6 +61,7 @@
 import { mapState } from "vuex";
 import tool from "../../utils/tool";
 import GoodsCard from "@/components/GoodsList/GoodsCard.vue";
+import MyHistory from "@/views/Search/MyHistory.vue";
 export default {
   data() {
     return {
@@ -71,9 +75,11 @@ export default {
       goodsList: [],
       showList: false,
       total: 0,
+      // 搜索历史记录
+      searchList: [],
     };
   },
-  components: { GoodsCard },
+  components: { GoodsCard, MyHistory },
   computed: {
     ...mapState({ counterMap: (state) => state.counterMap }),
     badge() {
@@ -89,6 +95,7 @@ export default {
   },
   created() {
     this.inputDebounce = tool.debounce(this.getlikeList, 300);
+    this.searchList = JSON.parse(localStorage.getItem("searchList")) || [];
     // console.log("this.inputDebounce", this.inputDebounce);
   },
   mounted() {
@@ -118,6 +125,22 @@ export default {
       } else {
         this.value = value;
       }
+      // 历史搜索按时间降序排序
+      const result = this.searchList.find((item) => item.value === this.value);
+      if (result) {
+        result.time = new Date().getTime();
+        this.searchList.sort((a, b) => b.time - a.time);
+      } else {
+        console.log("lppppp");
+        this.searchList.unshift({
+          value: this.value,
+          time: new Date().getTime(),
+        });
+        if (this.searchList.length >= 10) {
+          this.searchList.pop();
+        }
+      }
+      localStorage.setItem("searchList", JSON.stringify(this.searchList));
       this.likeList = [];
       this.page = 1;
       this.finished = false;
@@ -158,15 +181,20 @@ export default {
   height: 100vh;
   z-index: 10;
   background-color: #fff;
+
+  display: flex;
+  // justify-content: center;
+  flex-direction: column;
   .search-head {
     width: 345px;
+    // height: 110px;
     background-color: #fff;
     margin: 0 auto;
     display: flex;
     align-items: center;
-    position: fixed;
-    top: 0;
-    left: 15px;
+    // position: fixed;
+    // top: 0;
+    // left: 15px;
     z-index: 22px;
     .arr-left {
       font-size: 22px;
@@ -191,6 +219,16 @@ export default {
     margin: 48px auto 0;
     z-index: 10;
     background-color: #fff;
+  }
+  .history {
+    // width: 350px;
+    background-color: hotpink;
+    // position: absolute;
+    // top: 50px;
+    // left: 10px;
+    z-index: 1;
+    flex: 1;
+    overflow: auto;
   }
 }
 </style>

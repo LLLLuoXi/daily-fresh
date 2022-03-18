@@ -1,6 +1,6 @@
 /*
  * @Author: luoxi
- * @LastEditTime: 2022-03-16 21:52:12
+ * @LastEditTime: 2022-03-18 22:14:50
  * @LastEditors: your name
  * @Description:
  */
@@ -10,6 +10,12 @@ import Home from "../views/Home/index.vue";
 import Classify from "../views/Classify/index.vue";
 import Shopping from "../views/Shopping/index.vue";
 import Search from "../views/Search/index.vue";
+
+VueRouter.prototype.back = false
+VueRouter.prototype.goBack = function goBack() {
+  this.back = true
+  this.go(-1)
+}
 
 Vue.use(VueRouter);
 
@@ -21,6 +27,7 @@ const routes = [
     children: [
       {
         path: 'classify',
+        name: 'classify',
         component: Classify
       },
       {
@@ -31,6 +38,7 @@ const routes = [
   },
   {
     path: '/search',
+    name: 'search',
     component: Search
   },
   {
