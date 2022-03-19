@@ -1,6 +1,6 @@
 <!--
  * @Author: luoxi
- * @LastEditTime: 2022-03-18 21:42:41
+ * @LastEditTime: 2022-03-18 23:17:42
  * @LastEditors: your name
  * @Description: 
 -->
@@ -41,12 +41,14 @@ export default {
   }
   .his-item {
     margin-top: 10px;
-    padding: 15px;
+    padding: 10px 20px;
     background-color: #eee;
     border-radius: 10px;
     margin-left: 10px;
     margin-bottom: 10px;
     display: inline-block;
+    letter-spacing: 3px;
+    // font-weight: bold;
   }
 }
 </style>

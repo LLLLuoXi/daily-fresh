@@ -1,6 +1,6 @@
 <!--
  * @Author: luoxi
- * @LastEditTime: 2022-03-15 22:45:06
+ * @LastEditTime: 2022-03-18 23:22:24
  * @LastEditors: your name
  * @Description: 
 -->
@@ -95,6 +95,7 @@ export default {
       this.isLoading = false;
     },
     async onLoad() {
+      console.log("onLoad");
       this.page += 1;
       this.loading = true;
       const result = await this.getGoodsList({

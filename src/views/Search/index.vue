@@ -1,6 +1,6 @@
 <!--
  * @Author: luoxi
- * @LastEditTime: 2022-03-18 22:11:43
+ * @LastEditTime: 2022-03-20 01:11:55
  * @LastEditors: your name
  * @Description: 
 -->
@@ -19,6 +19,7 @@
       />
       <div @touchend="onSearch(value)" v-if="!showList">搜索</div>
       <van-icon
+        @click="goCar"
         name="cart-o"
         id="shop-car"
         class="shop-car"
@@ -171,6 +172,9 @@ export default {
       return item.replace(reg, this.value.fontcolor("red"));
       // console.log(item.replace(reg, this.value.fontcolor("red")));
     },
+    goCar() {
+      this.$router.push("./home/shopping");
+    },
   },
 };
 </script>
@@ -216,16 +220,11 @@ export default {
   .goods-list {
     position: relative;
     width: 345px;
-    margin: 48px auto 0;
+    margin: 10px auto 0;
     z-index: 10;
     background-color: #fff;
   }
   .history {
-    // width: 350px;
-    background-color: hotpink;
-    // position: absolute;
-    // top: 50px;
-    // left: 10px;
     z-index: 1;
     flex: 1;
     overflow: auto;

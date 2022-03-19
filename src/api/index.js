@@ -1,6 +1,6 @@
 /*
  * @Author: luoxi
- * @LastEditTime: 2022-03-16 22:18:53
+ * @LastEditTime: 2022-03-19 23:10:58
  * @LastEditors: your name
  * @Description: 
  */
@@ -40,9 +40,15 @@ const search = (type, page, size) => instance.get(
     { params: { type, page, size } }
 )
 
+const getGoodsByIds = (value) => instance.get(
+    URLs.getGoodsByIds,
+    { params: { value } }
+)
+
 export default {
     getSideList,
     getGoodsList,
     likeSearch,
-    search
+    search,
+    getGoodsByIds
 }
